@@ -3,5 +3,10 @@
   "name": "Anime Tracker",
   "description": "The next-generation Anime Tracker.",
   "version": "0.0.0",
-  "options_page": "/dashboard.html"
+  "options_page": "/dashboard.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
 }
