@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Row, Col, Menu, Card } from 'antd';
+import AnimeCard from 'dashboard/components/anime-card';
 import style from 'dashboard/components/main.css';
 
 function Main() {
@@ -11,14 +12,14 @@ function Main() {
       <Layout.Content className={style.content}>
         <Row gutter={16}>
           <Col span={8}>
-            <Card>Content...</Card>
-            <Card>Content...</Card>
+            <AnimeCard />
+            <AnimeCard />
           </Col>
           <Col span={8}>
-            <Card>Content...</Card>
+            <AnimeCard />
           </Col>
           <Col span={8}>
-            <Card>Content...</Card>
+            <AnimeCard />
           </Col>
         </Row>
       </Layout.Content>
