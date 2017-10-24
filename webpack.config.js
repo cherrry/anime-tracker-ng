@@ -1,13 +1,22 @@
 const path = require('path');
+const webpack = require('webpack');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const htmlTemplate = require('html-webpack-template');
 
+const ExtractSourceCss = new ExtractTextPlugin('[name]-source.css');
+const ExtractVendorCss = new ExtractTextPlugin('[name]-vendor.css');
+
 module.exports = {
-  entry: './dashboard.js',
+  entry: {
+    dashboard: './dashboard.js',
+    react: ['react', 'react-dom'],
+  },
   context: path.resolve(__dirname, 'src'),
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
@@ -25,26 +34,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            options: { modules: true },
-          },
-        ],
+        use: ExtractSourceCss.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: { module: true },
+            },
+          ],
+        }),
         include: path.resolve(__dirname, 'src'),
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
+        use: ExtractVendorCss.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader' },
+          ],
+        }),
         exclude: path.resolve(__dirname, 'src'),
       }
     ],
   },
   plugins: [
+    ExtractSourceCss,
+    ExtractVendorCss,
+    new webpack.optimize.CommonsChunkPlugin('react'),
     new HtmlWebpackPlugin({
       filename: 'dashboard.html',
       inject: false,
