@@ -27,9 +27,21 @@ module.exports = {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: { modules: true },
+          },
+        ],
+        include: path.resolve(__dirname, 'src'),
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
           { loader: 'css-loader' },
         ],
-      },
+        exclude: path.resolve(__dirname, 'src'),
+      }
     ],
   },
   plugins: [
