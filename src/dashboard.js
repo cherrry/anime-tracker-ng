@@ -1,11 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Button } from 'antd';
 
-function App() {
-  return (
-    <Button>Hello World</Button>
-  );
-}
+import Main from 'dashboard/components/main';
 
-render(<App />, document.getElementById('app-root'));
+render(<Main />, document.getElementById('app-root'));
