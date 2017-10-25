@@ -51,7 +51,7 @@ NewAnimeForm = Form.create()(NewAnimeForm);
 
 function NewAnimeModal() {
   return (
-    <Modal title="Add New Anime" visible={true}>
+    <Modal title="Add New Anime">
       <NewAnimeForm />
     </Modal>
   );
