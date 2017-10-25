@@ -49,9 +49,9 @@ class NewAnimeForm extends Component {
 
 NewAnimeForm = Form.create()(NewAnimeForm);
 
-function NewAnimeModal() {
+function NewAnimeModal({ close }) {
   return (
-    <Modal title="Add New Anime">
+    <Modal title="Add New Anime" visible={true} onCancel={close}>
       <NewAnimeForm />
     </Modal>
   );

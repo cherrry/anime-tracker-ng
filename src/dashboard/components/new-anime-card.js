@@ -1,19 +1,52 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, Icon } from 'antd';
 import cx from 'classnames';
+
+import NewAnimeModal from 'dashboard/modals/new-anime-modal';
 
 import style from 'dashboard/components/anime-card.css';
 
 const bodyStyle = {
-  fontSize: '32px',
+  fontSize: '24px',
 };
 
-function NewAnimeCard() {
-  return (
-    <Card className={cx(style.card, style.add)} bodyStyle={bodyStyle}>
-      <Icon type="plus" /> New Anime
-    </Card>
-  );
+class NewAnimeCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isModalVisible: false,
+    };
+  }
+
+  openModal() {
+    this.setState((state) => ({
+      isModalVisible: true,
+    }));
+  }
+
+  closeModal() {
+    this.setState((state) => ({
+      isModalVisible: false,
+    }));
+  }
+
+  render() {
+    let modal = null;
+    if (this.state.isModalVisible) {
+      modal = (<NewAnimeModal close={this.closeModal.bind(this)} />);
+    }
+
+    return(
+      <Card
+        className={cx(style.card, style.add)}
+        bodyStyle={bodyStyle}
+        onClick={this.openModal.bind(this)}
+      >
+        <Icon type="plus" /> Anime
+        {modal}
+      </Card>
+    );
+  }
 }
 
 export default NewAnimeCard;
