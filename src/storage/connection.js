@@ -7,7 +7,7 @@ schema.createTable('Anime')
   .addColumn('title', lf.Type.STRING)
   .addColumn('loaderKeyword', lf.Type.STRING)
   .addColumn('episodeLabelExtractor', lf.Type.STRING)
-  .addPrimaryKey(['animeId']);
+  .addPrimaryKey(['animeId'], /* autoIncrement = */ true);
 
 schema.createTable('Episode')
   .addColumn('episodeId', lf.Type.INTEGER)
@@ -15,7 +15,7 @@ schema.createTable('Episode')
   .addColumn('label', lf.Type.STRING)
   .addColumn('torrentLink', lf.Type.STRING)
   .addColumn('releasedAt', lf.Type.DATE)
-  .addPrimaryKey(['episodeId'])
+  .addPrimaryKey(['episodeId'], /* autoIncrement = */ true)
   .addUnique('uAnimeLabel', ['animeId', 'label'])
   .addForeignKey('fkAnimeId', {
     local: 'animeId',
