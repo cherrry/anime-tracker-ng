@@ -13,6 +13,8 @@ function Main() {
         <Row gutter={16}>
           <Col span={8}>
             <AnimeCard />
+          </Col>
+          <Col span={8}>
             <AnimeCard />
           </Col>
           <Col span={8}>
