@@ -1,6 +1,8 @@
 import React from 'react';
 import { Layout, Row, Col } from 'antd';
+
 import AnimeCard from 'dashboard/components/anime-card';
+import NewAnimeCard from 'dashboard/components/new-anime-card';
 
 import style from 'dashboard/main.css';
 
@@ -23,6 +25,9 @@ function Main() {
           </Col>
           <Col span={8}>
             <AnimeCard />
+          </Col>
+          <Col span={8}>
+            <NewAnimeCard />
           </Col>
         </Row>
       </Layout.Content>
