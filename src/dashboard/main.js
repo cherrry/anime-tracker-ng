@@ -10,8 +10,8 @@ function Main() {
       <Layout.Header>
         <span className={style.title}>Anime Tracker</span>
       </Layout.Header>
-      <Layout.Content className={style.content}>
-        <Row gutter={16}>
+      <Layout.Content className={style.contentContainer}>
+        <Row gutter={16} className={style.content}>
           <Col span={8}>
             <AnimeCard />
           </Col>

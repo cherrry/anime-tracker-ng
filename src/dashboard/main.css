@@ -2,8 +2,14 @@
   color: white;
 }
 
-.content {
+.contentContainer {
   padding: 24px 48px 0;
+}
+
+.content {
+  background: white;
+  padding: 16px;
+  min-height: 560px;
 }
 
 .footer {
