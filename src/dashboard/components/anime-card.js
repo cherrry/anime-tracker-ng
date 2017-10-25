@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import {Card} from 'antd';
 
 import style from 'dashboard/components/anime-card.css';
 

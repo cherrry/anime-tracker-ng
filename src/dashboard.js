@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from 'react-dom';
+import {render} from 'react-dom';
 
-import { LocaleProvider } from 'antd';
+import {LocaleProvider} from 'antd';
 import EnUS from 'antd/lib/locale-provider/en_US';
 
 import Main from 'dashboard/main';

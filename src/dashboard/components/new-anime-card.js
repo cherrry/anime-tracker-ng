@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Card, Icon } from 'antd';
+import React, {Component} from 'react';
+import {Card, Icon} from 'antd';
 import cx from 'classnames';
 
 import NewAnimeModal from 'dashboard/modals/new-anime-modal';
@@ -19,13 +19,13 @@ class NewAnimeCard extends Component {
   }
 
   openModal() {
-    this.setState((state) => ({
+    this.setState(() => ({
       isModalVisible: true,
     }));
   }
 
   closeModal() {
-    this.setState((state) => ({
+    this.setState(() => ({
       isModalVisible: false,
     }));
   }
@@ -36,7 +36,7 @@ class NewAnimeCard extends Component {
       modal = (<NewAnimeModal close={this.closeModal.bind(this)} />);
     }
 
-    return(
+    return (
       <Card
         className={cx(style.card, style.add)}
         bodyStyle={bodyStyle}

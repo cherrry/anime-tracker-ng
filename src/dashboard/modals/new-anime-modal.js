@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
-import { Modal, Form, Input } from 'antd';
+import React, {Component} from 'react';
+import {Modal, Form, Input} from 'antd';
+import PropTypes from 'prop-types';
 
-import { inputLayout } from 'dashboard/modals/form-layout';
+import {inputLayout} from 'dashboard/modals/form-layout';
 
-class NewAnimeForm extends Component {
+class NewAnimeFormBase extends Component {
+  static get propTypes() {
+    return {
+      form: {
+        getFieldDecorator: PropTypes.func.isRequired,
+      },
+    };
+  }
+
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const {getFieldDecorator} = this.props.form;
     return (
       <Form title="New Anime Form">
         <Form.Item label="Title" {...inputLayout}>
@@ -13,7 +22,7 @@ class NewAnimeForm extends Component {
             rules: [
               {
                 required: true,
-                message: "Please enter new anime's title.",
+                message: 'Please enter new anime\'s title.',
               },
             ],
           })(<Input />)}
@@ -37,7 +46,7 @@ class NewAnimeForm extends Component {
               },
               {
                 required: true,
-                message: "Please define extractor from episode source's title.",
+                message: 'Please define extractor from episode source\'s title.',
               },
             ],
           })(<Input />)}
@@ -47,14 +56,18 @@ class NewAnimeForm extends Component {
   }
 }
 
-NewAnimeForm = Form.create()(NewAnimeForm);
+let NewAnimeForm = Form.create()(NewAnimeFormBase);
 
-function NewAnimeModal({ close }) {
+function NewAnimeModal({close}) {
   return (
     <Modal title="Add New Anime" visible={true} onCancel={close}>
       <NewAnimeForm />
     </Modal>
   );
 }
+
+NewAnimeModal.propTypes = {
+  close: PropTypes.func.isRequired,
+};
 
 export default NewAnimeModal;

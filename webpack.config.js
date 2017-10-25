@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const path = require('path');
 const webpack = require('webpack');
 
@@ -30,7 +32,10 @@ module.exports = [
       rules: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          use: [
+            {loader: 'babel-loader'},
+            {loader: 'eslint-loader'},
+          ],
           exclude: /node_modules/,
         },
         {
@@ -40,7 +45,7 @@ module.exports = [
             use: [
               {
                 loader: 'css-loader',
-                options: { module: true },
+                options: {module: true},
               },
             ],
           }),
@@ -51,11 +56,11 @@ module.exports = [
           use: ExtractVendorCss.extract({
             fallback: 'style-loader',
             use: [
-              { loader: 'css-loader' },
+              {loader: 'css-loader'},
             ],
           }),
           exclude: path.resolve(__dirname, 'src'),
-        }
+        },
       ],
     },
     plugins: [

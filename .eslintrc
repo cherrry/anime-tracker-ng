@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "google"
+  ],
+  "rules": {
+    "max-len": ["error", 100],
+    "require-jsdoc": 0
+  }
+}

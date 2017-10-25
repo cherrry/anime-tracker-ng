@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row, Col } from 'antd';
+import {Layout, Row, Col} from 'antd';
 
 import AnimeCard from 'dashboard/components/anime-card';
 import NewAnimeCard from 'dashboard/components/new-anime-card';
