@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout, Row, Col, Menu, Card } from 'antd';
+import { Layout, Row, Col, Menu, Card, Modal } from 'antd';
 import AnimeCard from 'dashboard/components/anime-card';
-import style from 'dashboard/components/main.css';
+import NewAnimeModal from 'dashboard/modals/new-anime-modal';
+import style from 'dashboard/main.css';
 
 function Main() {
   return (
@@ -28,6 +29,7 @@ function Main() {
       <Layout.Footer className={style.footer}>
         Anime Tracker &copy;2017 Created By Cherry Ng
       </Layout.Footer>
+      <NewAnimeModal />
     </Layout>
   );
 }
