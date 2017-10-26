@@ -20,7 +20,7 @@ class NewAnimeCard extends Component {
 
   openModal() {
     this.setState(() => ({
-      modal: (<NewAnimeModal close={this.closeModal.bind(this)} />),
+      modal: (<NewAnimeModal onCancel={this.closeModal.bind(this)} />),
     }));
   }
 

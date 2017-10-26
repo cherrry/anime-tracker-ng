@@ -4,37 +4,27 @@ import PropTypes from 'prop-types';
 
 import {inputLayout} from 'dashboard/modals/form-layout';
 
-class NewAnimeModal extends Component {
+class NewAnimeModalBase extends Component {
   static get propTypes() {
     return {
-      close: PropTypes.func.isRequired,
+      onCancel: PropTypes.func.isRequired,
+      onSubmit: PropTypes.func.isRequired,
       form: PropTypes.shape({
         getFieldDecorator: PropTypes.func.isRequired,
-        validateFields: PropTypes.func.isRequired,
       }).isRequired,
     };
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        /* eslint-disable */
-        console.log('Add Anime: ', values);
-        /* eslint-enable */
-      }
-    });
-  }
-
   render() {
-    const {close} = this.props;
+    const {onCancel, onSubmit} = this.props;
     const {getFieldDecorator} = this.props.form;
     return (
       <Modal
-        title="Add New Anime"
         visible={true}
-        onCancel={close}
-        onOk={this.handleSubmit.bind(this)}
+        title="Add New Anime"
+        okText="Add"
+        onCancel={onCancel}
+        onOk={onSubmit}
       >
         <Form hideRequiredMark>
           <Form.Item label="Anime Title" {...inputLayout}>
@@ -77,4 +67,36 @@ class NewAnimeModal extends Component {
   }
 }
 
-export default Form.create()(NewAnimeModal);
+const NewAnimeModel = Form.create()(NewAnimeModalBase);
+
+class WrappedNewAnimeModel extends Component {
+  static get propTypes() {
+    return {
+      onCancel: PropTypes.func.isRequired,
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.form = null;
+  }
+
+  onSubmit(event) {
+    /* eslint-disable */
+    console.log(this.form);
+    /* eslint-enable */
+  }
+
+  render() {
+    const {onCancel} = this.props;
+    return (
+      <NewAnimeModel
+        wrappedComponentRef={(ref) => this.form = ref.props.form}
+        onCancel={onCancel}
+        onSubmit={this.onSubmit.bind(this)}
+      />
+    );
+  }
+}
+
+export default WrappedNewAnimeModel;
