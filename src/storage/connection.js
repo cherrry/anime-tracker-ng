@@ -5,8 +5,8 @@ let schema = lf.schema.create('anime', 1);
 schema.createTable('Anime')
   .addColumn('animeId', lf.Type.INTEGER)
   .addColumn('title', lf.Type.STRING)
-  .addColumn('loaderKeyword', lf.Type.STRING)
-  .addColumn('labelRegExp', lf.Type.STRING)
+  .addColumn('filterKeywords', lf.Type.STRING)
+  .addColumn('labelRegexp', lf.Type.STRING)
   .addPrimaryKey(['animeId'], /* autoIncrement = */ true);
 
 schema.createTable('Episode')

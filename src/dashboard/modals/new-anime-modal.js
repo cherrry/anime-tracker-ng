@@ -3,6 +3,7 @@ import {Modal, Form, Input, Table} from 'antd';
 import PropTypes from 'prop-types';
 import ellipsis from 'text-ellipsis';
 
+import addNewAnime from 'api/add-new-anime';
 import fetchFromSource from 'api/fetch-from-source';
 import {inputLayout} from 'dashboard/modals/form-layout';
 
@@ -129,11 +130,17 @@ class WrappedNewAnimeModel extends Component {
   }
 
   onSubmit() {
-    this.form.validateFields((err, values) => {
+    this.form.validateFields((err, {title, filterKeywords, labelRegexp}) => {
       if (!err) {
-        /* eslint-disable */
-        console.log('submit', values);
-        /* eslint-enable */
+        addNewAnime({
+          title: title,
+          loader: {
+            filterKeywords,
+            labelRegexp,
+          },
+        }).then((result) => {
+          this.props.onCancel();
+        });
       }
     });
   }
