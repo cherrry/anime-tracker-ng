@@ -16,34 +16,39 @@ class NewAnimeModalBase extends Component {
         getFieldValue: PropTypes.func.isRequired,
         getFieldError: PropTypes.func.isRequired,
       }).isRequired,
-      loaderKeywordValidator: PropTypes.func.isRequired,
+      filterKeywordsValidator: PropTypes.func.isRequired,
+      isLoadingPreview: PropTypes.bool.isRequired,
       rawEpisodes: PropTypes.arrayOf(PropTypes.shape({
-        title: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
         torrentLink: PropTypes.string.isRequired,
       })),
     };
   }
 
   render() {
-    const {onCancel, onSubmit, loaderKeywordValidator, rawEpisodes} = this.props;
+    const {
+      onCancel, onSubmit,
+      filterKeywordsValidator,
+      isLoadingPreview, rawEpisodes,
+    } = this.props;
     const {getFieldDecorator, getFieldValue, getFieldError} = this.props.form;
 
-    const labelRegExp = getFieldError('labelRegExp') ? '()' : getFieldValue('labelRegExp');
+    const labelRegExp = getFieldError('labelRegexp')
+      ? '(.*)' : getFieldValue('labelRegexp');
     const previewColumns = [
       {
-        title: 'Label',
-        dataIndex: 'title',
+        title: 'Episode',
+        dataIndex: 'label',
         render: (text) => {
           let match = (new RegExp(labelRegExp)).exec(text);
           return (match && match[1]) || 'N/A';
         },
-        width: '12%',
+        width: 100,
       },
       {
         title: 'Torrent Link',
         dataIndex: 'torrentLink',
-        width: '88%',
-        render: (text) => ellipsis(text, 50),
+        render: (text) => ellipsis(text, 40),
       },
     ];
 
@@ -67,18 +72,18 @@ class NewAnimeModalBase extends Component {
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Filter Keywords" {...inputLayout}>
-            {getFieldDecorator('loaderKeyword', {
+            {getFieldDecorator('filterKeywords', {
               rules: [
                 {
                   required: true,
                   message: 'Please enter keyword string for source filetering.',
                 },
-                {validator: loaderKeywordValidator},
+                {validator: filterKeywordsValidator},
               ],
             })(<Input />)}
           </Form.Item>
           <Form.Item label="Label RegExp" {...inputLayout}>
-            {getFieldDecorator('labelRegExp', {
+            {getFieldDecorator('labelRegexp', {
               rules: [
                 {
                   type: 'regexp',
@@ -95,6 +100,7 @@ class NewAnimeModalBase extends Component {
         <Table
           size='small'
           pagination={false}
+          loading={isLoadingPreview}
           rowKey='releasedAt'
           dataSource={rawEpisodes}
           columns={previewColumns}
@@ -117,37 +123,53 @@ class WrappedNewAnimeModel extends Component {
     super(props);
     this.form = null;
     this.state = {
+      isLoadingPreview: false,
       rawEpisodes: [],
     };
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.form.validateFields((err, values) => {
+      if (!err) {
+        /* eslint-disable */
+        console.log('submit', values);
+        /* eslint-enable */
+      }
+    });
+  }
 
-  loaderKeywordValidator(rule, value, callback) {
+  filterKeywordsValidator(rule, value, callback) {
     callback();
     const title = this.form.getFieldValue('title');
+    this.setState({
+      isLoadingPreview: true,
+    });
     fetchFromSource({
       animeId: null,
       title,
       loader: {
-        loaderKeyword: value,
-        labelRegExp: '(.*)',
+        filterKeywords: value,
+        labelRegexp: '(.*)',
       },
     }, 3).then((animes) => {
-      this.setState({rawEpisodes: animes.episodes});
+      this.setState({
+        isLoadingPreview: false,
+        rawEpisodes: animes.episodes,
+      });
     });
   }
 
   render() {
     const {onCancel} = this.props;
-    const {rawEpisodes} = this.state;
+    const {rawEpisodes, isLoadingPreview} = this.state;
     return (
       <NewAnimeModel
         wrappedComponentRef={(ref) => this.form = ref.props.form}
         onCancel={onCancel}
         onSubmit={this.onSubmit.bind(this)}
-        loaderKeywordValidator={this.loaderKeywordValidator.bind(this)}
+        filterKeywordsValidator={this.filterKeywordsValidator.bind(this)}
         rawEpisodes={rawEpisodes}
+        isLoadingPreview={isLoadingPreview}
       />
     );
   }

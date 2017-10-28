@@ -25,8 +25,8 @@ function getTorrentLink(item) {
 }
 
 function fetchFromSource(config, limit=15) {
-  let {loaderKeyword, labelRegExp} = config.loader;
-  return fetchXmlDocument(`https://share.dmhy.org/topics/rss/rss.xml?keyword=${loaderKeyword}`)
+  let {filterKeywords, labelRegexp} = config.loader;
+  return fetchXmlDocument(`https://share.dmhy.org/topics/rss/rss.xml?keyword=${filterKeywords}`)
     .then((doc) => {
       let latestAnimes = {
         animeId: config.animeId || null,
@@ -38,7 +38,7 @@ function fetchFromSource(config, limit=15) {
       for (let i = 0; i < limit && i < items.length; ++i) {
         const item = items[i];
         latestAnimes.episodes.push({
-          title: getTitle(item, labelRegExp),
+          label: getTitle(item, labelRegexp),
           releasedAt: getReleasedAt(item),
           torrentLink: getTorrentLink(item),
         });
