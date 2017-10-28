@@ -17,6 +17,9 @@ module.exports = [
       dashboard: './dashboard.js',
       react: ['react', 'react-dom'],
     },
+    node: {
+      fs: 'empty',
+    },
     context: path.resolve(__dirname, 'src'),
     output: {
       filename: '[name].js',
@@ -27,9 +30,6 @@ module.exports = [
         'node_modules',
         path.resolve(__dirname, 'src'),
       ],
-    },
-    externals: {
-      webtorrent: 'WebTorrent',
     },
     module: {
       rules: [
@@ -76,16 +76,9 @@ module.exports = [
         template: htmlTemplate,
         title: 'Anime Tracker',
         appMountId: 'app-root',
-        scripts: [
-          'webtorrent.min.js',
-        ],
       }),
       new CopyWebpackPlugin([
         'manifest.json',
-        {
-          from: 'webtorrent.min.js',
-          context: path.resolve(__dirname, 'node_modules/webtorrent'),
-        },
       ], {
         context: path.resolve(__dirname, 'src'),
       }),
