@@ -1,5 +1,8 @@
-import connection from 'storage/connection';
+import animeList from 'api/anime-list';
+import updateAnimeEpisodes from 'background/update-anime-episodes';
 
-connection.then((db) => {
-  console.log('success');
+animeList().then((animes) => {
+  animes.forEach((anime) => {
+    updateAnimeEpisodes(anime);
+  });
 });
