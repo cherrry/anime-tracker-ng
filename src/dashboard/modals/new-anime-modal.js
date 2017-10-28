@@ -55,7 +55,7 @@ class NewAnimeModalBase extends Component {
     return (
       <Modal
         visible={true}
-        title="Add New Anime"
+        title={getFieldValue('title') || 'Add New Anime'}
         okText="Add"
         onCancel={onCancel}
         onOk={onSubmit}
