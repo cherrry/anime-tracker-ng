@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Row, Col} from 'antd';
 
-import animeList from 'api/anime-list';
+import animeEpisodeList from 'api/anime-episode-list';
 import AnimeCard from 'dashboard/components/anime-card';
 import NewAnimeCard from 'dashboard/components/new-anime-card';
 import style from 'dashboard/components/anime-list.css';
@@ -15,7 +15,7 @@ class AnimeList extends Component {
   }
 
   componentDidMount() {
-    animeList().then((animes) => {
+    animeEpisodeList().then((animes) => {
       this.setState(() => ({animes}));
     });
   }

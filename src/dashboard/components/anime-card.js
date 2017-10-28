@@ -4,22 +4,24 @@ import {Card} from 'antd';
 
 import style from 'dashboard/components/anime-card.css';
 
-function AnimeCard({title}) {
+function AnimeCard({title, episodes}) {
   return (
     <Card title={title} noHovering className={style.card}>
-      <Card.Grid className={style.grid}>07</Card.Grid>
-      <Card.Grid className={style.grid}>06</Card.Grid>
-      <Card.Grid className={style.grid}>05</Card.Grid>
-      <Card.Grid className={style.grid}>04</Card.Grid>
-      <Card.Grid className={style.grid}>03</Card.Grid>
-      <Card.Grid className={style.grid}>02</Card.Grid>
-      <Card.Grid className={style.grid}>01</Card.Grid>
+      {episodes.map((episode, idx) => (
+        <Card.Grid key={idx} className={style.grid}>
+          {episode.label}
+        </Card.Grid>
+      ))}
     </Card>
   );
 }
 
 AnimeCard.propTypes = {
   title: PropTypes.string.isRequired,
+  episodes: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    torrentLink: PropTypes.string.isRequired,
+  })),
 };
 
 export default AnimeCard;
