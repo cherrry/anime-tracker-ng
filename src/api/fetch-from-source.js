@@ -35,13 +35,14 @@ function fetchFromSource(config, limit=15) {
       };
 
       let items = doc.querySelectorAll('item');
-      items.slice(0, limit).forEach((item) => {
+      for (let i = 0; i < limit && i < items.length; ++i) {
+        const item = items[i];
         latestAnimes.episodes.push({
           title: getTitle(item, labelRegExp),
           releasedAt: getReleasedAt(item),
           torrentLink: getTorrentLink(item),
         });
-      });
+      }
 
       return latestAnimes;
     });

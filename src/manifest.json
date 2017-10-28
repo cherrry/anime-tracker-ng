@@ -4,6 +4,9 @@
   "description": "The next-generation Anime Tracker.",
   "version": "0.0.0",
   "options_page": "/dashboard.html",
+  "permissions": [
+    "https://share.dmhy.org/*"
+  ],
   "background": {
     "scripts": [
       "background.js"
