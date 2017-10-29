@@ -3,7 +3,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const htmlTemplate = require('html-webpack-template');
@@ -17,9 +16,7 @@ module.exports = [
       dashboard: './dashboard.js',
       react: ['react', 'react-dom'],
     },
-    node: {
-      fs: 'empty',
-    },
+    target: 'electron-renderer',
     context: path.resolve(__dirname, 'src'),
     output: {
       filename: '[name].js',
@@ -77,16 +74,16 @@ module.exports = [
         title: 'Anime Tracker',
         appMountId: 'app-root',
       }),
-      new CopyWebpackPlugin([
-        'manifest.json',
-      ], {
-        context: path.resolve(__dirname, 'src'),
-      }),
     ],
   },
   {
     entry: {
-      background: './background.js',
+      electron: './electron.js',
+    },
+    target: 'electron-main',
+    node: {
+      __dirname: false,
+      __filename: false,
     },
     context: path.resolve(__dirname, 'src'),
     output: {
@@ -103,7 +100,10 @@ module.exports = [
       rules: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          use: [
+            {loader: 'babel-loader'},
+            {loader: 'eslint-loader'},
+          ],
           exclude: /node_modules/,
         },
       ],
