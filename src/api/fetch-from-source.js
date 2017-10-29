@@ -7,11 +7,9 @@ function fetchXmlDocument(url) {
     });
 }
 
-function getTitle(item, labelRegExp) {
+function getTitle(item) {
   let elem = item.querySelector('title');
-  let text = elem.textContent;
-  let match = (new RegExp(labelRegExp)).exec(text);
-  return match[1];
+  return elem.textContent;
 }
 
 function getReleasedAt(item) {
@@ -24,13 +22,12 @@ function getTorrentLink(item) {
   return elem.getAttribute('url') || '';
 }
 
-function fetchFromSource(config, limit=15) {
-  let {filterKeywords, labelRegexp} = config.loader;
+function fetchFromSource({animeId, title, filterKeywords}, limit=15) {
   return fetchXmlDocument(`https://share.dmhy.org/topics/rss/rss.xml?keyword=${filterKeywords}`)
     .then((doc) => {
       let latestAnimes = {
-        animeId: config.animeId || null,
-        title: config.title,
+        animeId,
+        title,
         episodes: [],
       };
 
@@ -38,12 +35,11 @@ function fetchFromSource(config, limit=15) {
       for (let i = 0; i < limit && i < items.length; ++i) {
         const item = items[i];
         latestAnimes.episodes.push({
-          label: getTitle(item, labelRegexp),
+          label: getTitle(item),
           releasedAt: getReleasedAt(item),
           torrentLink: getTorrentLink(item),
         });
       }
-
       return latestAnimes;
     });
 }

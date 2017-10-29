@@ -1,7 +1,10 @@
-import animeListFromDb from 'storage/anime-list';
+import connection from 'persistence/lovefield';
 
 function animeList() {
-  return animeListFromDb().then((animes) => {
+  return connection.then((db) => {
+    const animeTbl = db.getSchema().table('Anime');
+    return db.select().from(animeTbl).exec();
+  }).then((animes) => {
     return animes.map(({animeId, title, filterKeywords, labelRegexp}) => ({
       animeId,
       title,

@@ -48,7 +48,7 @@ class AnimeCard extends Component {
             onClick={this.watch.bind(this, idx)}
             className={style.grid}
           >
-            {episode.label}
+            {episode.title}
           </Card.Grid>
         ))}
         {isWatching ? (

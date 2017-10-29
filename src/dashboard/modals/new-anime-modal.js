@@ -42,7 +42,7 @@ class NewAnimeModalBase extends Component {
         dataIndex: 'label',
         render: (text) => {
           let match = (new RegExp(labelRegExp)).exec(text);
-          return (match && match[1]) || 'N/A';
+          return (match && match[1]) || text;
         },
         width: 100,
       },
@@ -134,10 +134,8 @@ class WrappedNewAnimeModel extends Component {
       if (!err) {
         addNewAnime({
           title: title,
-          loader: {
-            filterKeywords,
-            labelRegexp,
-          },
+          filterKeywords,
+          labelRegexp,
         }).then((result) => {
           this.props.onCancel();
         });
@@ -154,11 +152,9 @@ class WrappedNewAnimeModel extends Component {
     fetchFromSource({
       animeId: null,
       title,
-      loader: {
-        filterKeywords: value,
-        labelRegexp: '(.*)',
-      },
-    }, 3).then((animes) => {
+      filterKeywords: value,
+      labelRegexp: '(.*)',
+    }, 5).then((animes) => {
       this.setState({
         isLoadingPreview: false,
         rawEpisodes: animes.episodes,
