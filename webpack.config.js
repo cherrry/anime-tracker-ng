@@ -78,7 +78,7 @@ module.exports = [
   },
   {
     entry: {
-      electron: './electron.js',
+      electron: './main.js',
     },
     target: 'electron-main',
     node: {
