@@ -1,0 +1,12 @@
+service: anime-tracker
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: nodejs6.10
+functions:
+  helloWorld:
+    handler: handler.helloWorld
+    events:
+      - http:
+          path: hello-world
+          method: get
