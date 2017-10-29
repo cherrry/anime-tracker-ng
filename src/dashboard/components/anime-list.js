@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Col} from 'antd';
 
-import animeList from 'api/anime-list';
 import animeEpisodeList from 'api/anime-episode-list';
 import AnimeCard from 'dashboard/components/anime-card';
 import NewAnimeCard from 'dashboard/components/new-anime-card';
@@ -20,9 +19,6 @@ class AnimeList extends Component {
     animeEpisodeList().then((animes) => {
       console.log('with eposides', animes);
       this.setState(() => ({animes}));
-    });
-    animeList().then((animes) => {
-      console.log('list only', animes);
     });
     /* eslint-enable */
   }

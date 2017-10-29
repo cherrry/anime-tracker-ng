@@ -82,6 +82,7 @@ module.exports = [
     },
     target: 'electron-main',
     node: {
+      window: 'mock',
       __dirname: false,
       __filename: false,
     },

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Promise from 'bluebird';
 import _ from 'lodash';
 
@@ -15,7 +16,7 @@ function animeEpisodeList() {
         .from(episodeTbl)
         .where(episodeTbl.animeId.in(animeList.map(({animeId}) => animeId)))
         .exec();
-      return [animeList, episodeList];
+      return Promise.all([animeList, episodeList]);
     }).then((args) => {
       const animeList = args[0];
       const episodesByAnimeId = _.groupBy(args[1], 'animeId');

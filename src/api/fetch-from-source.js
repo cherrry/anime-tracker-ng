@@ -35,7 +35,7 @@ function fetchFromSource({animeId, title, filterKeywords}, limit=15) {
       for (let i = 0; i < limit && i < items.length; ++i) {
         const item = items[i];
         latestAnimes.episodes.push({
-          label: getTitle(item),
+          title: getTitle(item),
           releasedAt: getReleasedAt(item),
           torrentLink: getTorrentLink(item),
         });

@@ -9,8 +9,9 @@ class AnimeCard extends Component {
   static get propTypes() {
     return {
       title: PropTypes.string.isRequired,
+      labelRegexp: PropTypes.string.isRequired,
       episodes: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
         torrentLink: PropTypes.string.isRequired,
       })),
     };
@@ -38,8 +39,14 @@ class AnimeCard extends Component {
   }
 
   render() {
-    const {title, episodes} = this.props;
+    const {title, labelRegexp, episodes} = this.props;
     const {isWatching, watchingIdx} = this.state;
+
+    const regexp = new RegExp(labelRegexp);
+    const episodeTitle = (title) => {
+      const match = regexp.exec(title);
+      return (match && match[1]) || title;
+    };
     return (
       <Card title={title} noHovering className={style.card}>
         {episodes.map((episode, idx) => (
@@ -48,13 +55,13 @@ class AnimeCard extends Component {
             onClick={this.watch.bind(this, idx)}
             className={style.grid}
           >
-            {episode.title}
+            {episodeTitle(episode.title)}
           </Card.Grid>
         ))}
         {isWatching ? (
           <WatchAnimeModal
             title={title}
-            label={episodes[watchingIdx].label}
+            episodeTitle={episodeTitle(episodes[watchingIdx].title)}
             torrentLink={episodes[watchingIdx].torrentLink}
             onCancel={this.endWatching.bind(this)}
           />

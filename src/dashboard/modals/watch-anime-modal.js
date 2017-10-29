@@ -7,7 +7,7 @@ class WatchAnimeModal extends Component {
   static get propTypes() {
     return {
       title: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      episodeTitle: PropTypes.string.isRequired,
       torrentLink: PropTypes.string.isRequired,
       onCancel: PropTypes.func.isRequired,
     };
@@ -35,14 +35,16 @@ class WatchAnimeModal extends Component {
   }
 
   render() {
-    const {title, label, onCancel} = this.props;
+    const {title, episodeTitle, onCancel} = this.props;
     return (
       <Modal
         visible={true}
-        title={`${title} - ${label}`}
+        title={`${title} - ${episodeTitle}`}
         onCancel={onCancel}
         footer={null}
         maskClosable={false}
+        width={1320}
+        height={805}
       >
         <div ref={(video) => this.video = video} />
       </Modal>
