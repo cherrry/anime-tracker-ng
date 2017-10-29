@@ -25,5 +25,5 @@ schema.createTable('Episode')
 
 export default schema.connect({
   storeType: lf.schema.DataStoreType.FIREBASE,
-  firebase: firebase.database().ref(),
+  firebase: firebase,
 });

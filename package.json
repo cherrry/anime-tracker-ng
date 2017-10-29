@@ -10,7 +10,7 @@
     "antd": "^2.13.7",
     "bluebird": "^3.5.1",
     "classnames": "^2.2.5",
-    "firebase": "^4.6.0",
+    "firebase": "^2.3.0",
     "lovefield": "^2.1.12",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
