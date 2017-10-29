@@ -1,37 +1,30 @@
+import Promise from 'bluebird';
+import _ from 'lodash';
+
+import animeList from 'api/anime-list';
 import connection from 'persistence/lovefield';
 
 function animeEpisodeList() {
-  return connection.then((db) => {
-    const animeTbl = db.getSchema().table('Anime');
-    const episodeTbl = db.getSchema().table('Episode');
+  return Promise.all([animeList(), connection])
+    .then((args) => {
+      const animeList = args[0];
+      const db = args[1];
 
-    return db.select()
-      .from(animeTbl)
-      .innerJoin(episodeTbl, animeTbl.animeId.eq(episodeTbl.animeId))
-      .groupBy(animeTbl.animeId)
-      .exec();
-  }).then((animeEpisodes) => {
-    let animeMap = {};
-    let animeList = [];
+      const episodeTbl = db.getSchema().table('Episode');
+      const episodeList = db.select()
+        .from(episodeTbl)
+        .where(episodeTbl.animeId.in(animeList.map(({animeId}) => animeId)))
+        .exec();
+      return [animeList, episodeList];
+    }).then((args) => {
+      const animeList = args[0];
+      const episodesByAnimeId = _.groupBy(args[1], 'animeId');
 
-    animeEpisodes.forEach(({Anime, Episode}) => {
-      if (!animeMap.hasOwnProperty(Anime.animeId)) {
-        let anime = {
-          animeId: Anime.animeId,
-          title: Anime.title,
-          filterKeywords: Anime.filterKeywords,
-          labelRegexp: Anime.labelRegexp,
-          episodes: [],
-        };
-        animeMap[Anime.animeId] = anime;
-        animeList.push(anime);
-      }
-
-      let anime = animeMap[Anime.animeId];
-      anime.episodes.push(Episode);
+      return animeList.map((anime) => _.assign({}, anime, {
+        episodes: episodesByAnimeId.hasOwnProperty(anime.animeId)
+        ? episodesByAnimeId[anime.animeId] : [],
+      }));
     });
-    return animeList;
-  });
 }
 
 export default animeEpisodeList;
