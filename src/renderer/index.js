@@ -4,12 +4,12 @@ import {render} from 'react-dom';
 import {LocaleProvider} from 'antd';
 import EnUS from 'antd/lib/locale-provider/en_US';
 
-import Main from 'dashboard/main';
+import MainLayout from 'renderer/main-layout';
 
 function App() {
   return (
     <LocaleProvider locale={EnUS}>
-      <Main />
+      <MainLayout />
     </LocaleProvider>
   );
 }

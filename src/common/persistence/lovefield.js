@@ -1,5 +1,5 @@
 import lf from 'lovefield';
-import firebase from 'persistence/firebase';
+import firebase from 'common/persistence/firebase';
 
 let schema = lf.schema.create('anime', 1);
 

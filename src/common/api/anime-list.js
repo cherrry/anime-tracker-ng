@@ -1,4 +1,4 @@
-import connection from 'persistence/lovefield';
+import connection from 'common/persistence/lovefield';
 
 function animeList() {
   return connection.then((db) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Layout} from 'antd';
 
-import AnimeList from 'dashboard/components/anime-list';
-import style from 'dashboard/main.css';
+import AnimeList from 'renderer/components/anime-list';
+import style from 'renderer/main-layout.css';
 
-function Main() {
+function MainLayout() {
   return (
     <Layout>
       <Layout.Header>
@@ -20,4 +20,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainLayout;

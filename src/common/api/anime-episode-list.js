@@ -2,8 +2,8 @@
 import Promise from 'bluebird';
 import _ from 'lodash';
 
-import animeList from 'api/anime-list';
-import connection from 'persistence/lovefield';
+import animeList from 'common/api/anime-list';
+import connection from 'common/persistence/lovefield';
 
 function animeEpisodeList() {
   return Promise.all([animeList(), connection])

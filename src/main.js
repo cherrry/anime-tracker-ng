@@ -1,1 +1,0 @@
-import 'main/browser-instance';

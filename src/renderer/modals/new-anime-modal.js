@@ -3,9 +3,9 @@ import {Modal, Form, Input, Table} from 'antd';
 import PropTypes from 'prop-types';
 import ellipsis from 'text-ellipsis';
 
-import addNewAnime from 'api/add-new-anime';
-import fetchFromSource from 'api/fetch-from-source';
-import {inputLayout} from 'dashboard/modals/form-layout';
+import addNewAnime from 'common/api/add-new-anime';
+import fetchFromSource from 'common/api/fetch-from-source';
+import {inputLayout} from 'renderer/modals/form-layout';
 
 class NewAnimeModalBase extends Component {
   static get propTypes() {

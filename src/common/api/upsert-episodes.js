@@ -1,4 +1,4 @@
-import connection from 'persistence/lovefield';
+import connection from 'common/persistence/lovefield';
 
 function upsertEpisodes({animeId, episodes}) {
   return connection.then((db) => {

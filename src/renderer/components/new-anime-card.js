@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Card, Icon} from 'antd';
 import cx from 'classnames';
 
-import NewAnimeModal from 'dashboard/modals/new-anime-modal';
+import NewAnimeModal from 'renderer/modals/new-anime-modal';
 
-import style from 'dashboard/components/anime-card.css';
+import style from 'renderer/components/anime-card.css';
 
 const bodyStyle = {
   fontSize: '24px',

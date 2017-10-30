@@ -1,4 +1,4 @@
-import connection from 'persistence/lovefield';
+import connection from 'common/persistence/lovefield';
 
 function addNewAnime({title, filterKeywords, labelRegexp}) {
   return connection.then((db) => {
