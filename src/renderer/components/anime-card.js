@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Card} from 'antd';
 
-import WatchAnimeModal from 'renderer/modals/watch-anime-modal';
-import style from 'renderer/components/anime-card.css';
+import WatchAnimeModal from '@/modals/watch-anime-modal';
+import style from '@/components/anime-card.css';
 
 class AnimeCard extends Component {
   static get propTypes() {

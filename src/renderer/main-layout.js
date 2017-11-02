@@ -1,8 +1,8 @@
 import React from 'react';
 import {Layout} from 'antd';
 
-import AnimeList from 'renderer/components/anime-list';
-import style from 'renderer/main-layout.css';
+import AnimeList from '@/components/anime-list';
+import style from '@/main-layout.css';
 
 function MainLayout() {
   return (

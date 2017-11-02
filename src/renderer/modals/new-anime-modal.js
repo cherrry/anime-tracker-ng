@@ -5,7 +5,7 @@ import ellipsis from 'text-ellipsis';
 
 import addNewAnime from 'common/api/add-new-anime';
 import fetchFromSource from 'common/api/fetch-from-source';
-import {inputLayout} from 'renderer/modals/form-layout';
+import {inputLayout} from '@/modals/form-layout';
 
 class NewAnimeModalBase extends Component {
   static get propTypes() {

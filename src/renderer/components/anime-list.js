@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Row, Col} from 'antd';
 
 import animeEpisodeList from 'common/api/anime-episode-list';
-import AnimeCard from 'renderer/components/anime-card';
-import NewAnimeCard from 'renderer/components/new-anime-card';
-import style from 'renderer/components/anime-list.css';
+import AnimeCard from '@/components/anime-card';
+import NewAnimeCard from '@/components/new-anime-card';
+import style from '@/components/anime-list.css';
 
 class AnimeList extends Component {
   constructor(props) {

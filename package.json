@@ -7,11 +7,6 @@
     "dev": "electron-webpack dev",
     "compile": "electron-webpack"
   },
-  "electronWebpack": {
-    "renderer": {
-      "webpackConfig": "webpack.renderer.additions.js"
-    }
-  },
   "dependencies": {
     "antd": "^2.13.7",
     "bluebird": "^3.5.1",
