@@ -1,4 +1,6 @@
 import {app, BrowserWindow} from 'electron';
+import path from 'path';
+import url from 'url';
 
 // Keep global reference to avoid being garbage collected.
 let instance = null;
@@ -9,11 +11,14 @@ function ensureInstance() {
   }
 
   instance = new BrowserWindow();
-  if (process.env.NODE_ENV === 'production') {
-    instance.loadURL(`file://${__dirname}/index.html`);
-  } else {
-    instance.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
-  }
+  instance.loadURL(url.format({
+    pathname: path.resolve(__dirname, '../renderer/index.html'),
+    protocol: 'file:',
+    slashes: true,
+  }));
+
+  /*eslint-disable*/
+  console.log(__dirname);
 
   instance.on('closed', () => {
     instance = null;

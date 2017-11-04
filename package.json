@@ -4,10 +4,8 @@
   "private": true,
   "main": "./dist/main/main.js",
   "scripts": {
-    "compile:main": "webpack --config webpack.main.config.js",
-    "compile:renderer": "webpack --config webpack.renderer.config.js",
-    "compile": "yarn compile:main && yarn compile:renderer",
-    "dist": "yarn compile && electron-builder",
+    "build": "yarn webpack",
+    "dist": "yarn build && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "dependencies": {
@@ -33,8 +31,6 @@
     "css-loader": "^0.28.7",
     "electron": "1.7.9",
     "electron-builder": "^19.43.4",
-    "electron-webpack": "^1.11.0",
-    "electron-webpack-eslint": "^1.2.0",
     "eslint": "^4.9.0",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^1.9.0",
