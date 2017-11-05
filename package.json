@@ -1,8 +1,19 @@
 {
   "name": "anime-tracker-ng",
+  "description": "The next generation Anime Tracker.",
+  "author": "Cherry Ng <cherry92@gmail.com>",
   "version": "0.0.0",
   "private": true,
-  "main": "./dist/main/main.js",
+  "main": "dist/main/main.js",
+  "build": {
+    "appId": "io.cherrry.anime-tracker",
+    "files": [
+      "dist/main/**/*",
+      "dist/renderer/**/*",
+      "package.json"
+    ],
+    "publish": null
+  },
   "scripts": {
     "build": "yarn webpack",
     "dist": "yarn build && electron-builder",
